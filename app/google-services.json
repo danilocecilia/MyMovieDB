@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "319475465863",
+    "project_id": "default-demo-app-1beb2"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319475465863:android:f36173e948059ccb",
+        "android_client_info": {
+          "package_name": "gcm.play.android.samples.com.gcmquickstart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "319475465863-pfqkpda9ndvd6fqp9fhkq5v7og0ngk6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR5uZAd4TtbZsJvcbhMzXWXqwsDro3hsk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319475465863:android:fb0ac71bfb8c6ba7",
+        "android_client_info": {
+          "package_name": "dcecilia.MyMovieDB"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "319475465863-4q7hhq7t1ekf2kkadqf3q0u7b11ejpo0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dcecilia.MyMovieDB",
+            "certificate_hash": "35D64B0981D754D55CEEB7DCB93DB1A4FEAA9203"
+          }
+        },
+        {
+          "client_id": "319475465863-pfqkpda9ndvd6fqp9fhkq5v7og0ngk6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR5uZAd4TtbZsJvcbhMzXWXqwsDro3hsk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

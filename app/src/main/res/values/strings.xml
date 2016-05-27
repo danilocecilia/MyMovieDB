@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Movies DB</string>
+
+    <string name="info_header">Most Popular</string>
+    <string name="cvPopularMovies">Card View Popular Movies</string>
+    <string name="Most_Popular_Movie">Most Popular Movies</string>
+
+</resources>
