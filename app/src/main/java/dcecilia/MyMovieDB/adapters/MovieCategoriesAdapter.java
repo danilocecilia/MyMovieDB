@@ -1,5 +1,6 @@
 package dcecilia.MyMovieDB.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 
 import dcecilia.MyMovieDB.R;
+import dcecilia.MyMovieDB.activities.MovieDetailActivity;
 import dcecilia.MyMovieDB.models.Movie;
 import dcecilia.MyMovieDB.models.NetworkResponse;
 
@@ -65,14 +67,6 @@ public class MovieCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             vh.title.setText(movie.getTitle());
             vh.year.setText(movie.getReleaseDate().substring(0, 4));
             vh.vote_average.setText(new DecimalFormat("##.#").format(movie.getVoteAverage()));
-
-
-            vh.cvMostPopular.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //TODO:Call Detail Activity
-                }
-            });
         }
     }
 
@@ -97,6 +91,17 @@ public class MovieCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             title = (TextView)view.findViewById(R.id.title);
             year = (TextView)view.findViewById(R.id.year);
             vote_average = (TextView)view.findViewById(R.id.vote_average);
+
+            cvMostPopular.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO:Call Detail Activity
+                    int position = getAdapterPosition();
+                    Intent intent = new Intent(v.getContext(), MovieDetailActivity.class);
+                    intent.putExtra("ID", response.getResults().get(position).getId());
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }

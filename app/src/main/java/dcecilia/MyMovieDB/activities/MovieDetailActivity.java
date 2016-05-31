@@ -40,7 +40,7 @@ public class MovieDetailActivity extends BaseActivity implements ObservableScrol
 
     private float MAX_TEXT_SCALE_DELTA = 0.3f;
 
-    //private MovieDetailListAdapter adapter;
+    private MovieDetailListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class MovieDetailActivity extends BaseActivity implements ObservableScrol
         recyclerView.setScrollViewCallbacks(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(false);
+
         final View headerView = LayoutInflater.from(this).inflate(R.layout.recycler_header, null);
 
         headerView.post(new Runnable() {
@@ -159,15 +160,13 @@ public class MovieDetailActivity extends BaseActivity implements ObservableScrol
         int id = getIntent().getIntExtra("ID", 0);
 
         TheMovieDBDetailsApi.getInstance().getMovieDetails(id, new TheMovieDBDetailsApi.NetworkResponseListener() {
-
-            final RecyclerView recycler = recyclerView;
-
             @Override
-            public void onSuccess(final MovieDetails details, final View header) {
+            public void onSuccess(final MovieDetails details) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        recycler.setAdapter(new MovieDetailListAdapter(this, details, header));
+                        adapter = new MovieDetailListAdapter(details);
+                        recyclerView.setAdapter(adapter);
                     }
                 });
             }

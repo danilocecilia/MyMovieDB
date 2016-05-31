@@ -1,9 +1,11 @@
 package dcecilia.MyMovieDB.activities;
 
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.squareup.okhttp.Request;
 
@@ -23,6 +25,7 @@ public class MainActivity extends BaseActivity {
     private MovieTopRatedAdapter movieTopRatedAdapter;
     private int currentPage = 1;
     private int currentPageTopRated = 1;
+    private CardView cvMostPopular;
 
     @Override
     protected boolean getDisplayHomeAsUpEnabled() {
@@ -52,6 +55,12 @@ public class MainActivity extends BaseActivity {
         rvTopRated.setItemAnimator(new DefaultItemAnimator());
 
         populateTopRated();
+
+      /*  cvMostPopular = (CardView)findViewById(R.id.cvMostPopular);
+
+        cvMostPopular.setOnClickListener(new View.OnClickListener(){
+
+        });*/
 
        /* recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(gridLayoutManager) {
             @Override
