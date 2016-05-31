@@ -1,7 +1,7 @@
 # MyMovieDB
 It´s all about a watched movie library.
 
-This Readme contains the step by step to how to commit the files to github and also male clone of my project using only command line,
+This Readme contains the step by step on how to commit the files to github and also make clone of my project using only command line,
 As soon as I get used to it I will remove these instructions.
 
 Thanks!
