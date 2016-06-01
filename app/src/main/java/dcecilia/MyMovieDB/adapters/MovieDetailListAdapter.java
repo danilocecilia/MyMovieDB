@@ -10,10 +10,8 @@ import dcecilia.MyMovieDB.R;
 import dcecilia.MyMovieDB.models.MovieDetails;
 
 public class MovieDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int VIEW_TYPE_HEADER = 0;
-    private static final int VIEW_TYPE_ITEM = 1;
+    private static final int VIEW_TYPE_ITEM = 0;
 
-    private LayoutInflater mInflater;
     private MovieDetails movieDetails;
 
     public MovieDetailListAdapter(MovieDetails details) {
@@ -27,7 +25,7 @@ public class MovieDetailListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public int getItemViewType(int position) {
-        return (position == 0) ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
+        return VIEW_TYPE_ITEM;
     }
 
     @Override
@@ -35,32 +33,13 @@ public class MovieDetailListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         View view;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        /*if (viewType == VIEW_TYPE_HEADER) {
-            final View headerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_header, null);
-
-            headerView.post(new Runnable() {
-                @Override
-                public void run() {
-                    headerView.getLayoutParams().height = mFlexibleSpaceImageHeight;
-                }
-            });
-            return new HeaderViewHolder(mHeaderView);
-        } else {
-        */
-            return new ItemViewHolder(mInflater.inflate(android.R.layout.simple_list_item_1, parent, false));
-        //}
+        return new ItemViewHolder(inflater.inflate(android.R.layout.simple_list_item_1, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof ItemViewHolder) {
             ((ItemViewHolder) viewHolder).textView.setText(movieDetails.getTitle());
-        }
-    }
-
-    static class HeaderViewHolder extends RecyclerView.ViewHolder {
-        public HeaderViewHolder(View view) {
-            super(view);
         }
     }
 

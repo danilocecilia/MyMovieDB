@@ -56,12 +56,6 @@ public class MainActivity extends BaseActivity {
 
         populateTopRated();
 
-      /*  cvMostPopular = (CardView)findViewById(R.id.cvMostPopular);
-
-        cvMostPopular.setOnClickListener(new View.OnClickListener(){
-
-        });*/
-
        /* recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int current_page) {
