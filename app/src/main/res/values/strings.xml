@@ -6,5 +6,5 @@
     <string name="info_header">Most Popular</string>
     <string name="cvPopularMovies">Card View Popular Movies</string>
     <string name="Most_Popular_Movie">Most Popular Movies</string>
-
+    <string name="action_rate">Rate</string>
 </resources>

@@ -25,7 +25,6 @@ public class MainActivity extends BaseActivity {
     private MovieTopRatedAdapter movieTopRatedAdapter;
     private int currentPage = 1;
     private int currentPageTopRated = 1;
-    private CardView cvMostPopular;
 
     @Override
     protected boolean getDisplayHomeAsUpEnabled() {

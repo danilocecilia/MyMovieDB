@@ -86,12 +86,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
             poster = (ImageView) itemView.findViewById(R.id.poster);
             title = (TextView) itemView.findViewById(R.id.title);
             year = (TextView) itemView.findViewById(R.id.year);
-            /*header = (TextView) itemView.findViewById(R.id.header);
-            description = (TextView) itemView.findViewById(R.id.description);*/
-            //parent = itemView.findViewById(R.id.parent);
 
             parent.setOnClickListener(this);
-
         }
 
         @Override

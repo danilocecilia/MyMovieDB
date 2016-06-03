@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<ImageView
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="center|bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/common_ic_googleplayservices"/>-->
+    <Button
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="center|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="blah blah"/>
+</RelativeLayout>
+<!--
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
+        <TextView
+            android:layout_column="1"
+            android:text="Capitão America"
+             />
+    </TableRow>
+
+    <TableRow >
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_column="1"
+            android:text="January 2016    88 minutes"
+            android:textSize="10dp" />
+    </TableRow>
+
+    <View android:layout_margin="10dp"
+        android:layout_height="1dp"
+        android:background="#FF909090" />
+
+    <TableRow >
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_column="1"
+            android:text="RELEASE DATE"
+            android:textSize="10dp" />
+    </TableRow>
+
+    <View android:layout_margin="10dp"
+        android:layout_height="1dp"
+        android:background="#FF909090" />
+
+    <TableRow>
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_column="1"
+            android:text="15/01/2016"
+            android:textSize="10dp" />
+    </TableRow>
+
+    <View android:layout_margin="10dp"
+        android:layout_height="1dp"
+        android:background="#FF909090" />
+
+    <TableRow >
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_column="1"
+            android:text="DESCRIPTION"
+            android:textSize="10dp" />
+    </TableRow>
+</TableLayout>-->

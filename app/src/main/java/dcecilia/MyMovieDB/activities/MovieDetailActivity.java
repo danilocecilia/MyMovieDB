@@ -1,21 +1,17 @@
 package dcecilia.MyMovieDB.activities;
 
-import android.annotation.TargetApi;
-import android.content.res.Configuration;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
-import com.nineoldandroids.view.ViewHelper;
 import com.squareup.okhttp.Request;
 import com.squareup.picasso.Picasso;
 
@@ -26,62 +22,64 @@ import dcecilia.MyMovieDB.adapters.MovieDetailListAdapter;
 import dcecilia.MyMovieDB.models.MovieDetails;
 import dcecilia.MyMovieDB.networking.TheMovieDBDetailsApi;
 
+import com.google.android.youtube.player.YouTubeIntents;
+
 /**
  * Created by Danilo on 27/05/2016.
  */
-public class MovieDetailActivity extends BaseActivity implements ObservableScrollViewCallbacks {
+public class MovieDetailActivity extends BaseActivity {
 
-    private int mActionBarSize;
-
-    private float MAX_TEXT_SCALE_DELTA = 0.3f;
-
-    private MovieDetailListAdapter adapter;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+    private MovieDetailListAdapter movieDetailListAdapter;
+    private ImageView backdrop;
+    private static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w780";
+    private Toolbar mToolbar;
+    private ImageButton playVideoButton;
+    private AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.movie_detail);
+        setContentView(R.layout.activity_detail);
 
-        mActionBarSize = getActionBarSize();
+        toolbarSetup();
 
-        ObservableRecyclerView recyclerView = (ObservableRecyclerView) findViewById(R.id.recycler);
-        recyclerView.setScrollViewCallbacks(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(false);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
+        appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
 
-        setDummyDataWithHeader(recyclerView);
+        backdrop = (ImageView)findViewById(R.id.image_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        playVideoButton = (ImageButton)findViewById(R.id.btnPlayVideo);
+
+        setData(recyclerView);
     }
 
-    @Override
-    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-        // Translate overlay and image
+    private void toolbarSetup() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
-    }
-
-    @Override
-    public void onDownMotionEvent() {
-    }
-
-    @Override
-    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private void setPivotXToTitle() {
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(getDisplayHomeAsUpEnabled());
+        } else {
+            throw new NullPointerException("Layout must contain a toolbar with id 'toolbar'");
+        }
     }
 
     @Override
     protected boolean getDisplayHomeAsUpEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.movie_detail;
+        return R.layout.activity_detail;
     }
 
-    protected void setDummyDataWithHeader(final RecyclerView recyclerView) {
+    protected void setData(final RecyclerView recyclerView) {
         int id = getIntent().getIntExtra("ID", 0);
 
         TheMovieDBDetailsApi.getInstance().getMovieDetails(id, new TheMovieDBDetailsApi.NetworkResponseListener() {
@@ -90,8 +88,48 @@ public class MovieDetailActivity extends BaseActivity implements ObservableScrol
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new MovieDetailListAdapter(details);
-                        recyclerView.setAdapter(adapter);
+                        if(recyclerView.getAdapter() == null){
+                            recyclerView.setAdapter(new MovieDetailListAdapter(details));
+                        } else {
+                            movieDetailListAdapter.notifyDataSetChanged();
+                        }
+
+                        Picasso.with(recyclerView.getContext()).load(IMAGE_BASE_URL + details.getBackdrop_path()).into(backdrop);
+
+                        /**
+                         * Click Button to Watch the Tralier
+                         */
+                        playVideoButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = YouTubeIntents.createPlayVideoIntentWithOptions(v.getContext(), details.getTrailers().getYoutube().get(0).getSource(), true, false);
+                                startActivity(intent);
+                            }
+                        });
+
+                        /**
+                         * Hack to remove Title on the Collapsing Panel
+                         */
+                        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                            boolean isShow = false;
+                            int scrollRange = -1;
+
+                            @Override
+                            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                                if (scrollRange == -1) {
+                                    scrollRange = appBarLayout.getTotalScrollRange();
+                                }
+                                if (scrollRange + verticalOffset == 0) {
+                                    collapsingToolbarLayout.setTitle("");
+                                    isShow = true;
+                                } else if(isShow) {
+                                    collapsingToolbarLayout.setTitle("");
+                                    isShow = false;
+                                }
+
+                                collapsingToolbarLayout.setTitle("");
+                            }
+                        });
                     }
                 });
             }
